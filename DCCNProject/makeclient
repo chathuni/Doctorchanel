@@ -1,5 +1,5 @@
-client.out: error.o wrapunix.o wrapsock.o wraplib.o wrapstdio.o Patient.o readline.o writen.o strcliselect.o
-	cc -o client.out strcliselect.o error.o wrapunix.o wrapsock.o wraplib.o wrapstdio.o Patient.o readline.o writen.o
+Patient.out: error.o wrapunix.o wrapsock.o wraplib.o wrapstdio.o Patient.o readline.o writen.o strcliselect.o
+	cc -o Patient.out strcliselect.o error.o wrapunix.o wrapsock.o wraplib.o wrapstdio.o Patient.o readline.o writen.o
 
 error.o: error.c utils.h
 	cc -c error.c

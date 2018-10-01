@@ -1,5 +1,5 @@
-server.out: error.o wrapunix.o wrapsock.o wraplib.o wrapstdio.o AppoinmentServer.o readline.o writen.o str_echo.o
-	cc -o server.out str_echo.o error.o wrapunix.o wrapsock.o wraplib.o wrapstdio.o AppoinmentServer.o readline.o writen.o
+AppoinmentServer.out: error.o wrapunix.o wrapsock.o wraplib.o wrapstdio.o AppoinmentServer.o readline.o writen.o str_echo.o
+	cc -o AppoinmentServer.out str_echo.o error.o wrapunix.o wrapsock.o wraplib.o wrapstdio.o AppoinmentServer.o readline.o writen.o
 
 error.o: error.c utils.h
 	cc -c error.c

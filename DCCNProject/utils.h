@@ -20,7 +20,7 @@
 
 #define	LISTENQ	1024
 
-#define	SERV_TCP_PORT	52001
+#define	SERV_TCP_PORT	10000
 
 #define	SA	struct sockaddr
 

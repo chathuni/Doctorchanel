@@ -1,5 +1,5 @@
-client.out: error.o wrapunix.o wrapsock.o wraplib.o wrapstdio.o tcpcli.o readline.o writen.o strcliselect.o
-	cc -o client.out strcliselect.o error.o wrapunix.o wrapsock.o wraplib.o wrapstdio.o tcpcli.o readline.o writen.o
+client.out: error.o wrapunix.o wrapsock.o wraplib.o wrapstdio.o Patient.o readline.o writen.o strcliselect.o
+	cc -o client.out strcliselect.o error.o wrapunix.o wrapsock.o wraplib.o wrapstdio.o Patient.o readline.o writen.o
 
 error.o: error.c utils.h
 	cc -c error.c
@@ -16,8 +16,8 @@ wraplib.o: wraplib.c utils.h
 wrapstdio.o: wrapstdio.c utils.h
 	cc -c wrapstdio.c
 
-tcpcli.o: tcpcli.c utils.h
-	cc -c tcpcli.c
+Patient.o: Patient.c utils.h
+	cc -c Patient.c
 
 strcliselect.o: strcliselect.c utils.h
 	cc -c strcliselect.c

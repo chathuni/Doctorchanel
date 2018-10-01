@@ -39,12 +39,13 @@ main(int argc, char **argv)
 
 /* include fig02 */
 	for ( ; ; ) {
-		rset = allset;		/* structure assignment */
+		rset = allset;		//structure assignment
 		nready = Select(maxfd+1, &rset, NULL, NULL, NULL);
 
 
 		if (FD_ISSET(listenfd, &rset)) {	//need check listenfd is for reading/listening
 			clilen = sizeof(cliaddr);
+
 			connfd = Accept(listenfd, (SA *) &cliaddr, &clilen);
 #ifdef	NOTDEF
 			printf("new client: %s, port %d\n",
@@ -54,36 +55,36 @@ main(int argc, char **argv)
 
 			for (i = 0; i < FD_SETSIZE; i++)
 				if (client[i] < 0) {
-					client[i] = connfd;/* save descriptor */
+					client[i] = connfd;	//save client in client[]
 					break;
 				}
 			if (i == FD_SETSIZE)
 				err_quit("too many clients");
 
-			FD_SET(connfd, &allset);/* add new descriptor to set */
-					if (connfd > maxfd) //for 1st client if confd=4 > maxfd=3 then
-				maxfd = connfd;		//the new maxfd == 4 is now
+			FD_SET(connfd, &allset);
+					if (connfd > maxfd)	//for 1st client if confd=4 > maxfd=3 then
+				maxfd = connfd;				//the new maxfd == 4 is now
 			if (i > maxi)
-				maxi = i;    /* max index in client[] array */
+				maxi = i;    	// max index in client[] array
 
 			if (--nready <= 0)
-				continue;   /* no more readable descriptors */
+				continue;   	//no more readable descriptors
 		}
 
-		for (i = 0; i <= maxi; i++) {	/* check all clients for data */
+		for (i = 0; i <= maxi; i++) {			// check all clients for data
 			if ( (sockfd = client[i]) < 0)
 				continue;
 			if (FD_ISSET(sockfd, &rset)) {
 				if ( (n = Readline(sockfd, line, MAXLINE)) == 0) {
-					/*4connection closed by client */
-					Close(sockfd);
+
+					Close(sockfd);			//client has closed the connection
 					FD_CLR(sockfd, &allset);
 					client[i] = -1;
 				} else
 					Writen(sockfd, line, n);
 
 				if (--nready <= 0)
-					break;/* no more readable descriptors */
+					break;			//when no more readable descriptors
 			}
 		}
 	}

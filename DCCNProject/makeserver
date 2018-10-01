@@ -1,5 +1,5 @@
-server.out: error.o wrapunix.o wrapsock.o wraplib.o wrapstdio.o tcpservselect.o readline.o writen.o str_echo.o
-	cc -o server.out str_echo.o error.o wrapunix.o wrapsock.o wraplib.o wrapstdio.o tcpservselect.o readline.o writen.o
+server.out: error.o wrapunix.o wrapsock.o wraplib.o wrapstdio.o AppoinmentServer.o readline.o writen.o str_echo.o
+	cc -o server.out str_echo.o error.o wrapunix.o wrapsock.o wraplib.o wrapstdio.o AppoinmentServer.o readline.o writen.o
 
 error.o: error.c utils.h
 	cc -c error.c
@@ -16,8 +16,8 @@ wraplib.o: wraplib.c utils.h
 wrapstdio.o: wrapstdio.c utils.h
 	cc -c wrapstdio.c
 
-tcpservselect.o: tcpservselect.c utils.h
-	cc -c tcpservselect.c
+AppoinmentServer.o: AppoinmentServer.c utils.h
+	cc -c AppoinmentServer.c
 
 str_echo.o: str_echo.c utils.h
 	cc -c str_echo.c

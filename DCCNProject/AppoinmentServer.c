@@ -3,6 +3,7 @@
 
 #include	"utils.h"		
 #include	<sys/time.h>
+#include	<stdio.h>
 
 int
 main(int argc, char **argv)
@@ -11,10 +12,11 @@ main(int argc, char **argv)
 	int			nready, client[FD_SETSIZE];
 	ssize_t			n;
 	fd_set			rset, allset;
-	char			line[MAXLINE];
+	char			line[MAXLINE],ip[46];
 	socklen_t		clilen;
 	struct sockaddr_in	cliaddr, servaddr;
 	struct	timeval		timeval_val;
+	unsigned short 		clientport;
 
 
 	listenfd = Socket(AF_INET, SOCK_STREAM, 0);
@@ -47,11 +49,12 @@ main(int argc, char **argv)
 			clilen = sizeof(cliaddr);
 
 			connfd = Accept(listenfd, (SA *) &cliaddr, &clilen);
-#ifdef	NOTDEF
-			printf("new client: %s, port %d\n",
-			Inet_ntop(AF_INET, &cliaddr.sin_addr, 4, NULL),
-			ntohs(cliaddr.sin_port));
-#endif
+
+		
+			Inet_ntop(AF_INET, &cliaddr.sin_addr, ip, sizeof(ip));
+			clientport = ntohs(cliaddr.sin_port);
+			printf("connection from %s, port %hu\n", ip, clientport);
+
 
 			for (i = 0; i < FD_SETSIZE; i++)
 				if (client[i] < 0) {
